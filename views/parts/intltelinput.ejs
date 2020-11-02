@@ -1,0 +1,59 @@
+<script src="/js/intlTelInput.js"></script>
+<script src="/js/utils.js"></script>
+<script>
+    let input=document.querySelector('#phone')
+    window.intlTelInput(input,{
+        initialCountry: "auto",
+
+    })
+//     iti.isValidNumber()
+//     iti.getSelectedCountryData()
+
+//     {
+//   name: "Afghanistan (‫افغانستان‬‎)",
+//   iso2: "af",
+//   dialCode: "93"
+// }
+// var countryData = window.intlTelInputGlobals.getCountryData();
+// Returns an array of country objects:
+
+// [{
+//   name: "Afghanistan (‫افغانستان‬‎)",
+//   iso2: "af",
+//   dialCode: "93"
+// }, ...]
+// input.addEventListener("countrychange", function() {
+//     or on open 
+//     or on close
+//     (close and open dropdown)
+//   // do something with iti.getSelectedCountryData()
+// });
+
+
+    let iti = intlTelInput(input)
+    iti.setCountry('<%-myipinfo.country%>');
+    let btnsignup=document.querySelector('#signup')
+    btnsignup.onclick=(e)=>{
+        let phoneValue=document.querySelector('#phone').value
+        let myForm=document.querySelector('#myform')
+
+        // e.preventDefault()
+        let myPhone=document.createElement('input')
+        let phoneInfo
+        if(iti.isValidNumber()){
+         phoneInfo={
+            dialcode:iti.getSelectedCountryData().dialCode,
+            number:phoneValue,
+            iso2:iti.getSelectedCountryData().iso2,
+        }
+        JSON.stringify(phoneInfo)
+        myPhone.type='hidden'
+        myPhone.name='myphone'
+        myPhone.value=JSON.stringify(phoneInfo)
+        myForm.append(myPhone)
+
+    }
+    }
+
+    console.log(iti.getSelectedCountryData())
+</script>

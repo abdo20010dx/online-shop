@@ -1,0 +1,27 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <h1 style="text-align: center;color: green;background-color: aliceblue;">Add Product</h1>
+<form action="/admin/products" method="POST" enctype="multipart/form-data">
+    <label for="name">name</label>
+    <input type="text" class="form-control"  name="name" placeholder="product name">
+    <label for="price">price</label>
+    <input type="number" class="form-control"  name="price" placeholder="product price">
+    <label for="category">category</label>
+    <input type="text" class="form-control"  name="category" placeholder="product category">
+    <label for="description">description</label>
+    <input type="text" class="form-control"  name="description" placeholder="product description ">
+    <label for="offer">offer</label>
+    <input type="text" class="form-control"  name="offer" placeholder="product offer">
+    <label for="slide">slide show</label>
+    <input type="checkbox"  name="slide" ><br>
+    <label for="arrive">arrive in</label>
+    <input type="number" min="0" class="form-control"  name="arrive" placeholder="arrive in ???:hours">
+    <label for="image">image</label>
+    <input type="file" class="form-control"  name="image" placeholder="product image">
+    <input type="submit"  value="confirm" class="btn btn-primary">
+    <input type="hidden" name="redirected" value="/admin/products">
+
+  </form>
+</div>
+<%-include('parts/footer.ejs')%>

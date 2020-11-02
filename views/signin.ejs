@@ -1,0 +1,45 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<br>
+<div class="container">
+  <%if(blocked){%>
+    <p class="alert alert-danger">
+      <%=blocked%>
+    </p>
+    <%}%>
+<form action="/login" method="POST">
+    <div class="form-group">
+      <label for="email" style="display: inline;"><img src="email.png" style="width: 30px; height: 30px;"></label>
+      <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      <% let emailer=loginvalid.find(err =>err.param == "email") %>
+      <% if(emailer){ %>
+        <p class="alert alert-danger">
+          <%= emailer.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-group">
+      <label for="pass"><img src="pass.png" style="width: 30px;height: 30px;" style="display: inline-block;"></label>
+      <input type="password" class="form-control" name="pass" placeholder="Password">
+      <% let passer=loginvalid.find(err =>err.param == "pass") %>
+      <% if(passer){ %>
+        <p class="alert alert-danger">
+          <%= passer.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <button type="submit" class="btn btn-primary">log in</button>
+    <span style="margin-left: 10px;">    <a href="/resest">Forgot Your Password ?</a></span>
+
+  </form>
+  <%if(autherr){%>
+  <p class="alert alert-danger">
+    <%=autherr%>
+  </p>
+  <%}%>
+  <div>Don't have account <a href="/signup">Create Acount</a></div>
+</div>
+<%-include('parts/footer.ejs')%>

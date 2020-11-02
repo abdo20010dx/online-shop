@@ -1,0 +1,36 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+<form action="/profile/updatepass" method="POST">
+    <div class="form-group">
+        <label for="pass">Old Password</label>
+        <input type="password" class="form-control" name="pass" placeholder="old Password">
+        <% if(wrongpass){ %>
+            <p class="alert alert-danger">
+              <%= wrongpass %>
+            </p>
+            <% } %>
+    
+        <label for="newpass">New Password</label>
+        <input type="password" class="form-control" name="newpass" placeholder="new Password">
+        <% let newpasserr=updatepass.find(err =>err.param == "newpass") %>
+        <% if(newpasserr){ %>
+          <p class="alert alert-danger">
+            <%= newpasserr.msg %>
+          </p>
+          <% } %>
+  
+        <label for="confirmpass">Confirm Password</label>
+        <input type="password" class="form-control" name="confirmpass" placeholder="confirm Password">
+        <% let confirmerr=updatepass.find(err =>err.param == "confirmpass") %>
+        <% if(confirmerr){ %>
+          <p class="alert alert-danger">
+            <%= confirmerr.msg %>
+          </p>
+          <% } %>
+
+          </div>
+    <button type="submit" class="btn btn-primary">Confirm</button>
+  </form>
+</div>
+<%-include('parts/footer.ejs')%>

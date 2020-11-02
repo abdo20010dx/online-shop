@@ -1,0 +1,130 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+  <br>
+  <div class="alert alert-danger" id="offline">
+    offline now
+  </div>
+  <form action="/home/<%=seller%>" method="get">
+      <div class="form-group ">
+        <div style="display: inline-block;">
+
+        <select name="category" class="form-control" >
+          <option value="all">All</option>
+          <option value="phones">Phones</option>
+          <option value="cameras">Cameras</option>
+          <option value="beauty">Beauty</option>
+      </select>
+        </div>
+      <div style="display: inline-block;">
+
+        <input type="search"  name="search" placeholder="search about"  class="form-control">
+        </div>
+        <div style="display: inline-block;">
+        <input type="number" name="from" placeholder="From : price" class="form-control">
+      </div>
+      <div style="display: inline-block;">
+        <input type="number" name="to" placeholder="To : price" class="form-control">
+      </div>
+      </div>
+      <input type="submit" value="Filter" class="btn btn-primary">
+      </form>
+
+    <%if(itemcarterr){%>
+        <p class="alert alert-success"><%=itemcarterr%></p>
+        <%}%>
+        <%if(itemcarterr2){%>
+            <p class="alert alert-danger"><%=itemcarterr2.msg%></p>
+            <%}%>
+    <%if(products.length == 0){%>
+    <div class="alert alert-danger">
+        unfortunately there's no goods of this search now
+    </div>
+<%}else{%>
+        <div class="card" style="width: 100%;">
+
+            <div  class="card-body">
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                  <ol class="carousel-indicators">
+                    <%let prevent1=true %>
+
+                  <%products.map((product,index)=>{%>
+
+                      <%if(prevent1 && product.slide){%>
+                        <%prevent1 = false%>
+
+                      <li data-target="#carouselExampleIndicators" data-slide-to="<%=index%>" class="active"></li>
+                      <%}else if(product.slide){%>
+                      <li data-target="#carouselExampleIndicators" data-slide-to="<%=index%>"></li>
+                      <%}%>
+                    <%})%>
+                  </ol>
+                    <div class="carousel-inner">
+                      <%let prevent2=true %>
+
+                      <%products.map((product,index)=>{%>
+
+                        <%if(product.slide && prevent2){%>
+                          <%prevent2 = false%>
+                          <div class="carousel-item active">
+                           <a href="/product/<%=product._id%>"><img class="d-block w-100" src="<%=product.image%>" alt="<%=product.name%>"></a> 
+                          </div>
+                            <%}else if(product.slide){%>
+                              <div class="carousel-item">
+                                <a href="/product/<%=product._id%>"><img class="d-block w-100" src="<%=product.image%>" alt="<%=product.name%>"></a>
+                              </div>
+                              <%}%>
+                              <%})%>
+  
+
+
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+    <div class="row">
+        <% for(let product of products){ %>
+            <div class="col col-12 col-md-6 col-lg-4 col-x1-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="<%=product.image%>" class="card-img-top" >
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/product/<%=product._id%>"><%=product.name%></a></h5>
+                        <h5 class="card-title">price:<%=product.price%> $</h5>
+                        <h5 class="card-title">category:<%=product.category%></h5>
+                        <p class="card-text"><%=product.description%></p>
+                        <form action="/cart/<%=seller%>" method="post">
+                        <input type="number" min="1" name="amount" class="form-control" placeholder="amount">
+                        <input type="hidden" name="productid" value="<%=product._id%>">
+
+                        <!-- <input type="hidden" name="price" value="<%=product.price%>">
+                        <input type="hidden" name="name" value="<%=product.name%>">
+                        <input type="hidden" name="category" value="<%=product.category%>">
+                        <input type="hidden" name="description" value="<%=product.description%>">
+                        <input type="hidden" name="image" value="<%=product.image%>"> -->
+
+                        <input type="hidden" name="redirected" value="/">
+                        <input type="submit" class="btn btn-primary" value="Add to cart">
+                        </form>
+                    </div>
+                  </div>
+            </div>
+            <%}%>
+    </div>
+<%}%>
+<%if( !isowner && isuser){%>
+<%-include('parts/chat.ejs')%>
+<%}%>
+</div>
+<%if( !isowner && isuser){%>
+<%-include('jsAssets/chatElement.ejs')%>
+<%}%>
+
+<%-include('parts/footer.ejs')%>
+

@@ -1,0 +1,20 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <img src="<%=user.image%>" class="profileImage">
+    <h4 class="text-primary ">company name: <%=user.name%></h4>
+    <p class="text-info lead">about company: <%=user.about%></p>
+    <p class="text-info lead">company address: <%=user.address%></p>
+    <p class="text-info lead">company phone: <%=user.phone%></p>
+    <div>follow us on : <a href="https://<%=user.social.facebook%>">facebook</a></div>
+    <%if( !isowner && isuser){%>
+        <%-include('parts/chat.ejs')%>
+        <%}%>
+        
+
+</div>
+<%if( !isowner && isuser){%>
+<%-include('jsAssets/chatElement.ejs')%>
+<%}%>
+
+<%-include('parts/footer.ejs')%>

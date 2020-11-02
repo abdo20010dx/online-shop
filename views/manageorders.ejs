@@ -1,0 +1,68 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <form action="/myproducts/orders" method="GET">
+        <select name="searchtype" class="form-control">
+            <option value="email">Email</option>
+            <option value="email">Email</option>
+            <option value="phone">Phone</option>
+            <option value="status">Status</option>
+        </select>
+        <input name="search" type="text" class="form-control">
+        <input type="submit" value="Search" class="btn btn-primary">
+        </form>
+
+        <%if(items.length == 0){%>
+    <div class="alert alert-danger">
+        unfortunately there's no goods to manage now
+    </div>
+<%}else{%>
+    <form  method="POST">
+        <br>
+        <input type="submit" value="cancel all" formaction="/orders/cancel/all" class="btn btn-danger"><br>
+        <br>
+    <div class="row">
+        <% for(let item of items){ %>
+            <div class="col col-12 col-md-6 col-lg-4 col-x1-3">
+                        <div class="card" style="width: 18rem;">
+                    <img src="<%=item.image%>" class="card-img-top" >
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/product/<%=item.productid%>"><%=item.name%></a></h5>
+                        <h5 class="card-title">price:<%=item.price%> $</h5>
+                        <h5 class="card-title">total price:<%=item.price * item.amount%> $</h5>
+                        <h5 class="card-title">phone:<%=item.phone%></h5>
+                        <h5 class="card-text">email:<%=item.email%></h5>
+                        <p class="card-text">The Address:<%=item.address%></p>
+                        <h5 class="card-text">The Date : <%= new Date(item.timestamp).toLocaleDateString()%></h5>
+                        <form  method="POST">
+                            <select name="status" class="form-control">
+                                <option >status now: <%=item.status%></option>
+                                <option  value="pending">pending</option>
+                                <option  value="sent">sent</option>
+                                <option value="completed">completed</option>
+                            </select>            
+
+                            <%if(item.status == "pending"){%>
+                        <div class="card-text">amount:<%=item.amount%></div>
+                        <input type="submit" class="btn btn-success" formaction="/myproducts/orders/edit"   value="Edit Status">
+                        <input type="submit" class="btn btn-danger" formaction="/orders/cancel"  value="Delete">
+                        <%}else if(item.status == "sent"){%>
+                            <input type="submit" class="btn btn-success" formaction="/myproducts/orders/edit"   value="Edit Status">
+                            <input type="submit" class="btn btn-danger" formaction="/orders/cancel"  value="Delete">
+                                <%}else if(item.status == "completed"){%>
+                                    <input type="submit" class="btn btn-primary" formaction="/orders/cancel"  value="Clear">
+                                    <%}%>
+                        <input type="hidden" name="redirected" value="/admin/orders">
+                        <input type="hidden" name="itemid" value="<%=item._id%>">
+                        </form>
+                    </div>
+                  </div>
+            </div>
+            <%}%>
+    </div>
+<%}%>
+</form>
+
+</div>
+<%-include('parts/footer.ejs')%>
+

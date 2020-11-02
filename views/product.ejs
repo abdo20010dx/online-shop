@@ -1,0 +1,85 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <%if(itemcarterr){%>
+        <p class="alert alert-danger"><%=itemcarterr%></p>
+        <%}%>
+        <%if(itemcarterr2){%>
+            <p class="alert alert-danger"><%=itemcarterr2.msg%></p>
+            <%}%>
+
+    <%if(product == null){%>
+        <div class="aler alert-danger">
+            there's no product match your search
+        </div>
+    <%}else{%>
+        <%if(admin){%>
+            <div class="col col-12 col-md-6">
+                <img src="/<%=product.image%>" class="card-img-top" >
+                <form action="/cart/<%=product.sellerid%>" method="post">
+                    <input type="number" min="1" name="amount" class="form-control" placeholder="amount">
+                    <input type="hidden" name="productid" value="<%=product._id%>">
+                    <!-- <input type="hidden" name="price" value="<%=product.price%>">
+                    <input type="hidden" name="name" value="<%=product.name%>">
+                    <input type="hidden" name="category" value="<%=product.category%>">
+                    <input type="hidden" name="description" value="<%=product.description%>">
+                    <input type="hidden" name="image" value="<%=product.image%>"> -->
+                    <input type="hidden" name="redirected" value="/product/<%=product._id%>">
+                    <input type="submit" class="btn btn-primary" value="Add to cart">
+                    </form>
+            </div>
+            <div class="col col-12 col-md-6">
+                <form action="" method="post">
+                <label style="color: green;" for="name">name</label>
+                <input type="text" name="name" class="form-control" value='<%=product.name%>' />
+                <label style="color: green;" for="price">price</label>
+                <input type='number' name="price" class="form-control" value="<%=product.price%>" />
+                <label style="color: green;" for="category">category now: <span style="color: red;"><%=product.category%></span></label>
+                <select name="category" class="form-control" value="<%=product.category%>">
+                    <option value="beauty">beauty</option>
+                    <option value="phones">phones</option>
+                    <option value="cameras">cameras</option>
+                </select>
+                <label style="color: green;" for="description">description english</label>
+                <textarea name="description" class="form-control" cols="30" rows="3"><%=product.description%></textarea>
+                <label style="color: green;" for="description2">description portugese</label>
+                <textarea name="description2" class="form-control" cols="30" rows="3"><%=product.description2%></textarea>
+                <input type="submit" formaction="/admin/products/edit" class="btn btn-success" value="Edit">
+                <input type="submit" formaction="/admin/products/delete" class="btn btn-danger" value="Delete">
+                <input type="hidden" name="productid" value="<%=product._id%>">
+                <input type="hidden" name="redirected" value="/product/<%=product._id%>">
+            </form>
+            </div>
+    
+                <%}else{%>
+                    <div class="col col-12 col-md-6">
+                        <img src="/<%=product.image%>" class="card-img-top" >
+                        <form action="/cart/<%=product.sellerid%>" method="post">
+                            <input type="number" min="1" name="amount" class="form-control" placeholder="amount">
+                            <input type="hidden" name="productid" value="<%=product._id%>">
+            
+                            <!-- <input type="hidden" name="price" value="<%=product.price%>">
+                            <input type="hidden" name="name" value="<%=product.name%>">
+                            <input type="hidden" name="category" value="<%=product.category%>">
+                            <input type="hidden" name="description" value="<%=product.description%>">
+                            <input type="hidden" name="image" value="<%=product.image%>"> -->
+            
+                            <input type="hidden" name="redirected" value="/product/<%=product._id%>">
+                            <input type="submit" class="btn btn-primary" value="Add to cart">
+                            </form>
+                    </div>
+                    <div class="col col-12 col-md-6">
+                        <h5 class="card-title"><%=product.name%></a></h5>
+                        <h5 class="card-title">price:<%=product.price%> $</h5>
+                        <h5 class="card-title">category:<%=product.category%></h5>
+                        <p class="card-text"><%=product.description%></p>
+            
+                    </div>
+            
+                    <%}%>
+
+        <%}%>
+    <div class="row">
+    </div>
+</div>
+<%-include('parts/footer.ejs')%>

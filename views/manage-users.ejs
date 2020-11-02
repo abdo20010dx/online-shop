@@ -1,0 +1,59 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <form action="/admin/users" method="GET">
+        <input class="form-control"name="search" type="text" class="form-control" placeholder="Search By Email ">
+        <input type="submit" value="Search" class="btn btn-primary">
+        </form>
+        <%if(user){%>
+        <form action="/admin/users/update" class="card" method="POST">
+            <input type="submit" value="Confirm" class="btn btn-primary">
+            <div style="text-align: center;">
+                <div class="btn btn-success"  style="margin-top: 5px;margin-right: 5px;" style="margin-top: 5px;margin-right: 5px;">
+                    Make Chief <input type="radio" name="updated" value="chief">
+                </div>
+                <div class="btn btn-success"  style="margin-top: 5px;margin-right: 5px;">
+            Make Admin  <input type="radio" name="updated" value="admin">
+                </div>
+                <div class="btn btn-success"  style="margin-top: 5px;margin-right: 5px;"> 
+            Make User  <input type="radio" name="updated" value="user">
+                </div>
+                <div class="btn btn-secondary"  style="margin-top: 5px;margin-right: 5px;">
+            Block User  <input type="radio" name="updated" value="block">
+                </div>
+                <div class="btn btn-secondary"  style="margin-top: 5px;margin-right: 5px;">
+            Block User And Clear Cart  <input type="radio" name="updated" value="blockclear">
+                </div>
+                <div class="btn btn-secondary"  style="margin-top: 5px;margin-right: 5px;background-color: yellowgreen;">
+            Unblock User  <input type="radio" name="updated" value="unblock">
+                </div>
+                <div class="btn btn-danger"  style="margin-top: 5px;margin-right: 5px;">
+            Delete  <input type="radio" name="updated" value="delete">
+                </div>
+        </div>
+            <div class="card-body">
+                <label for="name">name</label>
+                <input class="form-control"type="text"  name="name" readonly value="<%=user.username%>">
+                <label for="age">age</label>
+                <input class="form-control"type="text" name="age" readonly value="<%=user.age%>">
+                <label for="city">city</label>
+                <input class="form-control"type="text" name="city" readonly value="<%=user.city%>">
+                <label for="address">address</label>
+                <input class="form-control"type="text" name="address" readonly value="<%=user.address%>">
+                <label for="phone">phone</label>
+                <input class="form-control"type="text" name="phone" readonly value="<%=user.phone%>">
+                <label for="email">email</label>
+                <input class="form-control"type="text" name="email" readonly value="<%=user.email%>">
+                <label for="admin">admin</label>
+                <input class="form-control"type="text" name="admin" readonly value="<%=user.admin%>">
+                <label for="chief">chief</label>
+                <input class="form-control"type="text" name="chief" readonly value="<%=user.chief%>">
+                <label for="blocked">blocked</label>
+                <input class="form-control"type="text" name="blocked" readonly value="<%=user.block%>">
+            </div>
+        </form>
+        <%}%>
+
+</div>
+<%-include('parts/footer.ejs')%>
+

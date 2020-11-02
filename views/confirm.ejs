@@ -1,0 +1,12 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+<form action="/orders" method="POST">
+    <label for="address">address of order</label>
+    <input type="text" class="form-control" value="<%=address%>" name="address" placeholder="default address for orders">
+    <input type="submit" formaction="/orders" value="confirm" class="btn btn-primary">
+    <input type="hidden" name="redirected" value="/orders">
+
+  </form>
+</div>
+<%-include('parts/footer.ejs')%>

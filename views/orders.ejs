@@ -1,0 +1,60 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+        <%if(items.length == 0){%>
+    <div class="alert alert-danger">
+        unfortunately there's no goods of this cart now
+    </div>
+<%}else{%>
+    <form  method="POST">
+        <br>
+        <input type="submit" value="cancel all" formaction="/orders/cancel/all" class="btn btn-danger"><br>
+        <br>
+    <div class="row">
+        <% for(let item of items){ %>
+
+            <%   let getDaysAndHours=(milliS)=>{
+                let hours=milliS / 1000 /60 / 60
+                if(hours < 0 )hours=0
+                let arrive=hours >= 24 ? {hours: Math.ceil(hours % 24), days:Math.floor(hours /24)}:{hours:Math.ceil(hours)}
+                return arrive
+            }
+            let passedTime=new Date() - item.timestamp
+            let restTime=getDaysAndHours(item.arrive - passedTime)
+
+        %>
+
+            <div class="col col-12 col-md-6 col-lg-4 col-x1-3">
+                <h5 class="card-title">Status:<%=item.status%></h5>
+                <div class="card" style="width: 18rem;">
+                    <img src="<%=item.image%>" class="card-img-top" >
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/product/<%=item.productid%>"><%=item.name%></a></h5>
+                        <h5 class="card-title">price:<%=item.price%> $</h5>
+                        <h5 class="card-title">total price:<%=item.price * item.amount%> $</h5>
+                        <h5 class="card-title">category:<%=item.category%></h5>
+                        <p class="card-text"><%=item.description%></p>
+                        <p class="card-text">The Address:<%=item.address%></p>
+                        <p class="card-text">The Remaining Time : <%= restTime.days %> days , <%=restTime.hours %> hours </p>
+                        <form action="/cart" method="post">
+                            <%if(item.status == "pending"){%>
+                        <div>amount<input type="number" min="1" value="<%=item.amount%>" name="amount" class="form-control" placeholder="amount"></div>
+                        <input type="submit" class="btn btn-success" formaction="/orders/edit"   value="Edit amount">
+                        <input type="submit" class="btn btn-danger" formaction="/orders/cancel"  value="Cancel">
+                        <%}else if(item.status == "sent"){%>
+                            <input type="submit" class="btn btn-primary" formaction="/orders/cancel"  value="clear">
+                            <%}%>
+                        <input type="hidden" name="redirected" value="/cart">
+                        <input type="hidden" name="itemid" value="<%=item._id%>">
+                        </form>
+                    </div>
+                  </div>
+            </div>
+            <%}%>
+    </div>
+<%}%>
+</form>
+
+</div>
+<%-include('parts/footer.ejs')%>
+

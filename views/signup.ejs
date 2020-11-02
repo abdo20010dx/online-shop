@@ -1,0 +1,118 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<br>
+<div class="container">
+
+<form action="/signup" method="POST" id="myform">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="email" style="display: inline;"><img src="email.png" style="width: 30px; height: 30px;"></label>
+        <input type="email" style="display: inline;" class="form-control" before name="email" placeholder="Email">
+        <%if(emailexist){%>
+          <p class="alert alert-danger">
+            <%=emailexist%>
+          </p>
+          <%}%>
+
+
+
+        <% let emailer=validerr.find(err =>err.param == "email") %>
+        <% if(emailer){ %>
+          <p class="alert alert-danger">
+            <%= emailer.msg %>
+          </p>
+          <% } %>
+  
+      </div>
+      <div class="form-group col-md-6">
+        <label for="pass"><img src="pass.png" style="width: 30px;height: 30px;" style="display: inline-block;"></label>
+        <input type="password" class="form-control" name="pass" placeholder="Password">
+        <% let passer=validerr.find(err =>err.param == "pass") %>
+        <% if(passer){ %>
+          <p class="alert alert-danger">
+            <%= passer.msg %>
+          </p>
+          <% } %>
+  
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <input type="password" class="form-control" name="confirmpass" placeholder="confirm Password">
+    </div>
+
+    <div class="form-group col-md-6">
+      <input type="text" class="form-control" name="name" placeholder="name">
+      <% let nameer=validerr.find(err =>err.param == "name") %>
+      <% if(nameer){ %>
+        <p class="alert alert-danger">
+          <%= nameer.msg %>
+        </p>
+        <% } %>
+    </div>
+    <div class="form-group ">
+      <h5 class="text-warning">Account Type</h5>
+      <input type="radio" id="factory"  name="profession"  value="factory">
+      <label for="factory" class=" job-label" ><span class="job-span">Factory</span><br><img src="factory.png"  class="job-img" ></label>
+      <input type="radio" class="form-control" id="trader" name="profession"  value="trader">
+      <label for="trader" class=" job-label"><span class="job-span">Wholesaler</span><img src="trader.jpg"  class="job-img"></label>
+      <input type="radio" class="form-control" id="shop" name="profession"  value="shop">
+      <label for="shop" class=" job-label" ><span class="job-span">Shop</span><img src="shop.png"  class="job-img" ></label>
+      <input type="radio" class="form-control" id="customer" name="profession"  value="customer">
+      <label for="customer" class=" job-label"><span class="job-span">Customer</span><img src="customer.jpg"  class="job-img" ></label>
+     
+      <% let professionerr=validerr.find(err =>err.param == "profession") %>
+      <% if(professionerr){ %>
+        <p class="alert alert-danger">
+          <%= professionerr.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-group">
+      <label for="address"><img src="address.png" style="width: 30px;width: 30px;" class="form-icon"></label>
+      <input type="text" class="form-control" name="address" placeholder="default address">
+      <% let addresserr=validerr.find(err =>err.param == "address") %>
+      <% if(addresserr){ %>
+        <p class="alert alert-danger">
+          <%= addresserr.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-group">
+      <label for="phone"><img src="phone.png" style="width: 50px;width: 50px;" class="form-icon"></label>
+      <input type="tel" placeholder id="phone" name="phone"  class="social-input">
+      <% let phoneerr=validerr.find(err =>err.param == "myphone") %>
+      <% if(phoneerr){ %>
+        <p class="alert alert-danger">
+          <%= phoneerr.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <div>
+          <label for="facebook"><img src="facebook.png" style="width: 30px;width: 30px;" class="form-icon"></label>
+          <input type="text"  name="facebook" class="social-input" placeholder="Optional :PUT LINK">  
+        </div>
+        <div>
+          <label for="instagram"><img src="instagram.png" style="width: 30px;width: 30px;" class="form-icon"></label>
+          <input type="text" class="social-input"  name="instagram" placeholder="Optional :PUT LINK">  
+        </div>
+        <div>
+          <label for="youtube"><img src="youtube.png" style="width: 30px;width: 30px;" class="form-icon"></label>
+          <input type="text" class="social-input"  name="youtube" placeholder="Optional :PUT LINK">  
+        </div>
+
+      </div>
+    </div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary" id="signup">Sign up</button>
+     <span style="margin-left: 10px;">   Already Have Account <a href="/login">Log In</a></span>
+  </div>
+</form>
+</div>
+
+<%-include('./parts/intltelinput.ejs')%>
+<%-include('parts/footer.ejs')%>

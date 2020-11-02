@@ -1,0 +1,28 @@
+<%if(!checkfriend){%>
+<script>
+            chatinput.onkeyup=(e)=>{
+            console.log(e.keyCode)
+        socket.emit('addfriend')
+            
+        }
+
+
+    // let send=()=>{
+    //     socket.emit('server','from client to server')
+    // }
+
+    // let joinRoom=()=>{
+    //     socket.emit('joinRoom')
+    // }
+
+    // let send=()=>{
+    //     socket.emit('server','from client to server')
+    // }
+
+    // socket.on('client',wel=>{
+    //     console.log(wel)
+        
+    // })
+
+</script>
+<%}%>

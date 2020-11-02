@@ -1,0 +1,21 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <%if(activemess){%>
+        <p class="alert alert-warning">
+            <%=activemess%>
+        </p>
+        <%}else{%>
+        <p class="alert alert-warning">
+            Want To Resend The Activation Link To Your Email !!
+        </p>
+        <%}%>
+    <form action="/activation" method="POST">
+        <label for="email" style="display: inline;"><img src="email.png" style="width: 30px; height: 30px;"></label>
+        <input class="form-control" name="email" type="email" placeholder="Email ">
+        <input type="submit" value="Resend Again" class="btn btn-primary"> 
+    </form>
+    <span style="margin-left: 10px;">   Already Activated <a href="/login">Log In</a></span>
+</div>
+<%-include('parts/footer.ejs')%>
+

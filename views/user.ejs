@@ -1,0 +1,84 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+<%if(updatesuccess){%>
+  <p class="alert alert-success">
+    <%=updatesuccess%>
+  </p>
+<%}%>
+<form class="card" action="/profile/update" method="POST">
+  <div class="card-body">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="email">Email</label>
+        <input readonly type="email" class="form-control" name="email" value="<%=user.email%>">
+  
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="username">username</label>
+      <input type="text" class="form-control" name="username" value="<%=user.username%>">
+      <% let nameerr=updateprofile.find(err =>err.param == "username") %>
+      <% if(nameerr){ %>
+        <p class="alert alert-danger">
+          <%= nameerr.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-group">
+      <label for="city">city</label>
+      <input type="text" class="form-control" name="city" value="<%=user.city%>">
+      <% let cityerr=updateprofile.find(err =>err.param == "city") %>
+      <% if(cityerr){ %>
+        <p class="alert alert-danger">
+          <%= cityerr.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-group">
+      <label for="address">address</label>
+      <input type="text" class="form-control" name="address" value="<%=user.address%>">
+      <% let addresserr=updateprofile.find(err =>err.param == "address") %>
+      <% if(addresserr){ %>
+        <p class="alert alert-danger">
+          <%= addresserr.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-group">
+      <label for="phone">phone</label>
+      <input type="text" class="form-control" name="phone" value="<%=user.phone%>">
+      <% let phoneerr=updateprofile.find(err =>err.param == "phone") %>
+      <% if(phoneerr){ %>
+        <p class="alert alert-danger">
+          <%= phoneerr.msg %>
+        </p>
+        <% } %>
+
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="age">age</label>
+        <input type="number" class="form-control" name="age" value="<%=user.age%>">
+        <% let ageerr=updateprofile.find(err =>err.param == "age") %>
+        <% if(ageerr){ %>
+          <p class="alert alert-danger">
+            <%= ageerr.msg %>
+          </p>
+          <% } %>
+  
+      </div>
+    </div>
+    <div>
+      <a href="/profile/updatepass" class="btn btn-secondary">Change password -></a>
+    </div><br>
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <a href="/" class="btn btn-danger">Cancel</a>
+  </div>
+</form>
+</div>
+
+<%-include('parts/footer.ejs')%>

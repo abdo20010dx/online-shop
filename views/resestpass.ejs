@@ -1,0 +1,55 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <%if(resest){%>
+        <p class="alert alert-warning">
+            <%=resest.mess%>
+        </p>
+        <form action="/resest/pass" method="POST">
+            <label for="pass"><img src="pass.png" style="width: 30px;height: 30px;" style="display: inline-block;"></label>
+            <input class="form-control" name="newpass" type="password" placeholder="New password ">
+            <% let passer=passvalid.find(err =>err.param == "newpass") %>
+            <% if(passer){ %>
+              <p class="alert alert-danger">
+                <%= passer.msg %>
+              </p>
+              <% } %>
+
+            <input class="form-control" name="confirmpass" type="password" placeholder="Confirm Password ">
+            <% let confirmerr=passvalid.find(err =>err.param == "confirmpass") %>
+            <% if(confirmerr){ %>
+              <p class="alert alert-danger">
+                <%= confirmerr.msg %>
+              </p>
+              <% } %>
+      
+            <input type="hidden" name="id" value="<%=resest.id%>">
+            <input type="hidden" name="hashed" value="<%=resest.hashed%>">
+            <input type="submit" value="Change Password" class="btn btn-primary"> 
+        </form>
+        <%}else if(passchanged){%>
+            <p class="alert alert-success">
+                <%=passchanged%>
+            </p>
+            <span style="margin-left: 10px;"> You Can Log In !!<a href="/login">Log In</a></span>
+        <%}else{%>
+            <%if(resestsent){%>
+                
+        <p class="alert alert-warning">
+            <%=resestsent%>
+        </p>
+                <%}else{%>
+        <p class="alert alert-warning">
+            Want To Resest The Password,Send Resest Link To Your Email !!
+        </p>
+        <%}%>
+        <form action="/resest" method="POST">
+            <label for="email" style="display: inline;"><img src="email.png" style="width: 30px; height: 30px;"></label>
+            <input class="form-control" name="email" type="email" placeholder="Email ">
+            <input type="submit" value="Resest" class="btn btn-primary"> 
+        </form>
+    
+        <%}%>
+</div>
+<%-include('parts/footer.ejs')%>
+

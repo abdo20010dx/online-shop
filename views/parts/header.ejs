@@ -1,0 +1,151 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>home</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/intlTelInput.css">
+    <style>
+        input[name='email'],input[name='pass'],input[name='address']{
+            width: 90%;
+            display: inline-block;
+        }
+        .social-input{
+            padding: 3px;
+            border-radius: 7px;
+                }
+                .social-input:focus{
+                    box-shadow: 0px 0px 10px 0px #88c2ff;
+
+                }
+        .fom-icon{
+            width: 30px;
+            height: 30px;
+        }
+        .job-span{
+            text-align: center;
+            font-weight: bolder;
+        }
+        .job-img{
+            width: 100%;
+            height:inherit;
+        }
+        .job-label{
+            margin-bottom: 20px;
+            text-align: center;
+            width: 100px;
+            height: 100px;
+                }
+        input[type='radio']{
+            display: none;
+        }
+        input[type='radio']:checked + label {
+            opacity: 70%;
+            color: white;
+            background-color: #007bff;
+        }
+        .iti__flag{background-image: url('/img/flags.png');}
+        @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi) {
+            .iti__flag{background-image: url('/img/flags@2x.png');}
+
+        }
+        .profileImage{
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+        }
+        .openchat{
+            width: 200px;
+            right: inherit;
+            border: 1px solid black;
+            position: fixed;
+            bottom: 2px;
+            display: block;
+
+        }
+        .chat{
+            width: 200px;
+            height: 300px;
+            right: inherit;
+            border: 1px solid black;
+            position: fixed;
+            bottom: 2px;
+            display: none;
+            padding: 5px;
+        }
+        .chat button{
+            width: 100%;
+        
+        }
+        .chat p span{
+            padding: 2px;
+        }
+        .speaker1{
+            display: block;
+
+            margin: 2px;
+            text-align: right;
+            background-color: rgb(121, 161, 187);
+        }
+        .speaker2{
+            display: block;
+
+            margin: 2px;
+            text-align: left;
+            background-color:silver;
+        }
+        .imagechat{
+            display: inline;
+            border-radius: 50%;
+            margin: 2px;
+            width: 30px;
+            height: 30px;
+        }
+        .chatinput{
+            bottom: 0px;
+            position: absolute;
+            width: 95%;
+        }
+    </style>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = io()
+       socket.on('connect',()=>{
+        let userData={
+            name:'<%-user.name%>',
+            profession:'<%-user.profession%>',
+            image:'<%-user.image%>',
+            seller:'<%-isuser%>',
+        }
+
+        socket.emit('signedin',userData)
+           
+       })
+       console.log(`online${'<%-seller%>'}`)
+
+       socket.on(`online${'<%-seller%>'}`,friendData=>{
+           console.log(`online${'<%-seller%>'}`)
+        let userCase=document.querySelector('#offline')
+              userCase.classList.replace('alert-danger','alert-success')
+              userCase.innerHTML=`${friendData.name} is online now`
+
+       })
+       
+       socket.on(`offline${'<%-seller%>'}`,friendData=>{
+           console.log(`online${'<%-seller%>'}`)
+        let userCase=document.querySelector('#offline')
+              userCase.classList.replace('alert-success','alert-danger')
+              userCase.innerHTML=`${friendData.name} is offline now`
+
+       })
+
+
+
+       socket.on('myOnlineFriends',friends=>{
+          let onlineFriend= friends.some(item=>item.id === '<%-seller%>')
+          if(onlineFriend){
+          }
+       })
+       </script>
+       </head>
+<body>
+    

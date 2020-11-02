@@ -1,0 +1,56 @@
+<%-include('parts/header.ejs')%>
+<%-include('parts/navbar.ejs')%>
+<div class="container">
+    <%if(itemcarterr){%>
+        <p class="alert alert-success"><%=itemcarterr%></p>
+        <%}%>
+
+        <%if(itemcarterr2){%>
+            <p class="alert alert-danger"><%=itemcarterr2.msg%></p>
+            <%}%>
+            <%if(itemdeleted){%>
+                <p class="alert alert-danger"><%=itemdeleted%></p>
+                <%}%>
+        <%if(items.length == 0){%>
+    <div class="alert alert-danger">
+        unfortunately there's no goods of this cart now
+    </div>
+<%}else{%>
+    <form action="/orders/confirm" method="POST">
+    <input type="hidden" name="all" value="all">
+    <input type="submit" value="order all" formaction="/orders/confirm" class="btn btn-primary">
+    <input type="submit" value="delete all" formaction="/cart/delete/all" class="btn btn-danger"><br>
+    </form>
+    <form  method="POST">
+        <br>
+        <br>
+    <div class="row">
+        <% for(let item of items){ %>
+            <div class="col col-12 col-md-6 col-lg-4 col-x1-3">
+                <div class="card" style="width: 18rem;">
+                    <img src="<%=item.image%>" class="card-img-top" >
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="/product/<%=item.productid%>"><%=item.name%></a></h5>
+                        <h5 class="card-title">price:<%=item.price%> $</h5>
+                        <h5 class="card-title">total price:<%=item.price * item.amount%> $</h5>
+                        <h5 class="card-title">category:<%=item.category%></h5>
+                        <p class="card-text"><%=item.description%></p>
+                        <form method="post">
+                        <div>amount<input type="number" min="1" value="<%=item.amount%>" name="amount" class="form-control" placeholder="amount"></div>
+                        <input type="submit" class="btn btn-primary" formaction="/orders/confirm"   value="order">
+                        <input type="submit" class="btn btn-success" formaction="/cart/save"   value="save">
+                        <input type="submit" class="btn btn-danger" formaction="/cart/delete"  value="delete">
+                        <input type="hidden" name="redirected" value="/cart">
+                        <input type="hidden" name="itemid" value="<%=item._id%>">
+                        </form>
+                    </div>
+                  </div>
+            </div>
+            <%}%>
+    </div>
+<%}%>
+</form>
+
+</div>
+<%-include('parts/footer.ejs')%>
+
