@@ -2,9 +2,9 @@
 <%-include('parts/navbar.ejs')%>
 <div class="container">
   <br>
-  <div class="alert alert-danger" id="offline">
-    offline now
-  </div>
+  <a style="display:inline-block;" class="alert alert-danger" href="/profile/<%=seller%>" id="offline">
+    <%if(products[0]){%> <%=products[0].sellername%> <%}%> is offline now
+  </a>
   <form action="/home/<%=seller%>" method="get">
       <div class="form-group ">
         <div style="display: inline-block;">
@@ -39,6 +39,9 @@
     <%if(products.length == 0){%>
     <div class="alert alert-danger">
         unfortunately there's no goods of this search now
+        <%if(seller == isuser){%>
+          <a href="/myproducts/add">Add New Product</a>
+          <%}%>
     </div>
 <%}else{%>
         <div class="card" style="width: 100%;">
@@ -126,5 +129,6 @@
 <%-include('jsAssets/chatElement.ejs')%>
 <%}%>
 
+<%-include('parts/onlineUsers.ejs')%>
 <%-include('parts/footer.ejs')%>
 

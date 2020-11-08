@@ -25,7 +25,6 @@ myproductscontroller.getAdd
 
 Router.post('/add',
 protector.isUser,
-protector.isAdmin,
 multer({
     storage:multer.diskStorage({
         destination:(req,file,cb)=>{
@@ -52,13 +51,11 @@ myproductscontroller.saveAdd
 
 Router.post('/edit',
 protector.isUser,
-protector.isAdmin,
 bodyParser.urlencoded({extended:true}),
 myproductscontroller.updateProduct
 )
 Router.post('/delete',
 protector.isUser,
-protector.isAdmin,
 bodyParser.urlencoded({extended:true}),
 myproductscontroller.deleteProduct
 )

@@ -1,10 +1,20 @@
 const authModel=require('../models/auth.model')
 exports.friendSocket=(Io,app)=>{
     Io.on('connection',socket=>{
-        socket.on('signedin',userdata=>{
+
+
+        socket.on('signedin',(userdata)=>{
             Io.sockets.emit(`online${userdata.seller}`,userdata)
-        })
-        socket.on('disconnect',()=>{
+            Io.onlineUsers[userdata.seller]=true
+            authModel.getUserAndFilter({_id:userdata.seller},{friends:true}).then(friends=>{
+                let myOnlineUsers=friends[0].friends.filter(friend=>Io.onlineUsers[friend.id])
+                socket.emit('myOnlineFriends',myOnlineUsers)
+            })
+
+
+
+            socket.on('disconnect',()=>{
+                Io.onlineUsers[userdata.seller]=false
             let userData={
                 name:socket.handshake.session.User.name,
                 profession:socket.handshake.session.User.profession,
@@ -13,21 +23,10 @@ exports.friendSocket=(Io,app)=>{
             }
     
                 Io.sockets.emit(`offline${userData.seller}`,userData)
-    
-        })
-        // socket.on('signedin',(id)=>{
-        //     Io.onlineUsers[id]=true
-        //     authModel.getUserAndFilter({_id:id},{friends:true}).then(friends=>{
-        //         let myOnlineUsers=friends[0].friends.filter(friend=>Io.onlineUsers[friend.id])
-        //         socket.emit('myOnlineFriends',myOnlineUsers)
-        //     })
-        //     socket.on('disconnect',()=>{
-        //         Io.onlineUsers[id]=false
-        //         console.log(Io.onlineUsers)
-        //     })
+            })
     
 
-        // })
+        })
     })
 
 

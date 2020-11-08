@@ -1,0 +1,33 @@
+<script>
+           console.log(`online${'<%-seller%>'}`)
+
+socket.on(`online${'<%-seller%>'}`,friendData=>{
+    console.log(`online${'<%-seller%>'}`)
+ let userCase=document.querySelector('#offline')
+       userCase.classList.replace('alert-danger','alert-success')
+       userCase.innerHTML=`${friendData.name} is online now`
+
+})
+
+socket.on(`offline${'<%-seller%>'}`,friendData=>{
+    console.log(`online${'<%-seller%>'}`)
+ let userCase=document.querySelector('#offline')
+       userCase.classList.replace('alert-success','alert-danger')
+       userCase.innerHTML=`${friendData.name} is offline now`
+
+})
+
+
+
+socket.on('myOnlineFriends',friends=>{
+   let onlineFriend= friends.filter(item=>item.id === '<%-seller%>')
+   if(onlineFriend.length >0){
+     let userCase=document.querySelector('#offline')
+       userCase.classList.replace('alert-danger','alert-success')
+       userCase.innerHTML=` ${onlineFriend[0].name} is online now`
+       console.log(onlineFriend)
+
+   }
+})
+
+</script>

@@ -7,7 +7,7 @@ const productSchema=mongoose.Schema({
     offer:String,
     image:String,
     sellerid:String,
-    entity:String,
+    sellername:String,
     arrive:Number,
     slide:Boolean,
     search:{

@@ -126,9 +126,9 @@ exports.getProfile=(req,res,next)=>{
         res.render('profilePage',{
             isuser:req.session.userId,
             user:userData[0],
+            seller:userData[0]._id,
             checkfriend:checkFriend,
             isowner:req.params.id == req.session.userId,
-            user:req.session.User
         })
     })
     // next()

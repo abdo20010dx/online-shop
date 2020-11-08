@@ -15,7 +15,8 @@ exports.getProduct=(req,res,next)=>{
         isuser:req.session.userId,
         admin:req.session.Admin,
         itemcarterr:errcart,
-        itemcarterr2:errcart2
+        itemcarterr2:errcart2,
+        user:req.session.User,
     
     })
     }

@@ -2,11 +2,14 @@
 <%-include('parts/navbar.ejs')%>
 <div class="container">
     <img src="<%=user.image%>" class="profileImage">
+    <a style="display:inline-block;" class="alert alert-danger" href="/home/<%=user._id%>" id="offline">
+        <%=user.name%> is offline now
+      </a>
     <h4 class="text-primary ">company name: <%=user.name%></h4>
     <p class="text-info lead">about company: <%=user.about%></p>
     <p class="text-info lead">company address: <%=user.address%></p>
     <p class="text-info lead">company phone: <%=user.phone%></p>
-    <div>follow us on : <a href="https://<%=user.social.facebook%>">facebook</a></div>
+    <div>follow us on : <a href="https://<%=user.social.facebook%>"><img src="facebook.png" style="width: 30px;width: 30px;" class="form-icon"></a>   <a href="https://<%=user.social.instagram%>"><img src="instagram.png" style="width: 30px;width: 30px;" class="form-icon"></a>  <a href="https://<%=user.social.youtube%>"><img src="youtube.png" style="width: 40px;width: 40px;" class="form-icon"></a></div>
     <%if( !isowner && isuser){%>
         <%-include('parts/chat.ejs')%>
         <%}%>
@@ -16,5 +19,5 @@
 <%if( !isowner && isuser){%>
 <%-include('jsAssets/chatElement.ejs')%>
 <%}%>
-
+<%-include('parts/onlineUsers.ejs')%>
 <%-include('parts/footer.ejs')%>

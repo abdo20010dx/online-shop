@@ -13,7 +13,7 @@
             there's no product match your search
         </div>
     <%}else{%>
-        <%if(admin){%>
+        <%if(isuser == product.sellerid){%>
             <div class="col col-12 col-md-6">
                 <img src="/<%=product.image%>" class="card-img-top" >
                 <form action="/cart/<%=product.sellerid%>" method="post">
@@ -44,8 +44,8 @@
                 <textarea name="description" class="form-control" cols="30" rows="3"><%=product.description%></textarea>
                 <label style="color: green;" for="description2">description portugese</label>
                 <textarea name="description2" class="form-control" cols="30" rows="3"><%=product.description2%></textarea>
-                <input type="submit" formaction="/admin/products/edit" class="btn btn-success" value="Edit">
-                <input type="submit" formaction="/admin/products/delete" class="btn btn-danger" value="Delete">
+                <input type="submit" formaction="/myproducts/edit" class="btn btn-success" value="Edit">
+                <input type="submit" formaction="/myproducts/delete" class="btn btn-danger" value="Delete">
                 <input type="hidden" name="productid" value="<%=product._id%>">
                 <input type="hidden" name="redirected" value="/product/<%=product._id%>">
             </form>

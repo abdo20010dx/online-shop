@@ -6,7 +6,9 @@ const fs =require('fs')
 const path=require('path')
 exports.getAdd=(req,res,next)=>{
     res.render('add-product',{
-        isuser:req.session.userId
+        isuser:req.session.userId,
+        user:req.session.User,
+        seller:1222
     })
 }
 
@@ -22,7 +24,7 @@ exports.saveAdd=(req,res,next)=>{
         offer:offer,
         image:req.file.filename,
         sellerid:req.session.userId,
-        buyername:req.session.User.name,
+        sellername:req.session.User.name,
         arrive:+arrive * 60 *60*1000,
         slide:slide == 'on'?true:false
     
