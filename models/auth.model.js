@@ -27,7 +27,7 @@ const userSchema=mongoose.Schema({
     //     default:false
     // },
     friends:{
-        type:[{name:String,image:String,id:String}],
+        type:[{name:String,image:String,id:String,chatid:String}],
         default:[]
     },
     blockedfriends:{
