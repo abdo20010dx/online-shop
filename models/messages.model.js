@@ -9,11 +9,7 @@ const messageSchema=mongoose.Schema({
 })
 const Message=mongoose.model('message',messageSchema)
 const mongoosedb=(db)=>{
-<<<<<<< Updated upstream
-    return `mongodb://localhost:27017/${db}`
-=======
     return `mongodb+srv://abdo:mythologyofpasswordthroughdecades@cluster0.kxzcn.mongodb.net/${db}?retryWrites=true&w=majority`
->>>>>>> Stashed changes
 }
 
 
