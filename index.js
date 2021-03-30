@@ -19,7 +19,7 @@ const flash=require('connect-flash')
 const sessionServer=require('express-session')
 const sessionStore=require('connect-mongodb-session')(sessionServer)
 const STORE=new sessionStore({
-    uri:'mongodb://localhost:27017/ecommerce',
+    uri:`mongodb+srv://abdo:mythologyofpasswordthroughdecades@cluster0.kxzcn.mongodb.net/ecommerce?retryWrites=true&w=majority`,
     collection:'sessions'
 })
 const session=sessionServer({

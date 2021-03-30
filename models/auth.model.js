@@ -54,7 +54,8 @@ const userSchema=mongoose.Schema({
 })
 const User=mongoose.model('user',userSchema)
 const mongoosedb=(db)=>{
-    return `mongodb://localhost:27017/${db}`
+    // return `mongodb://localhost:27017/${db}`
+    return `mongodb+srv://abdo:mythologyofpasswordthroughdecades@cluster0.kxzcn.mongodb.net/${db}?retryWrites=true&w=majority`
 }
 
 exports.saveUser=(name,address,phone,email,pass,profession,social)=>{

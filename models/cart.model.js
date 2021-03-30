@@ -17,7 +17,7 @@ const cartSchema=mongoose.Schema({
 })
 const Cart=mongoose.model('cart',cartSchema)
 const mongoosedb=(db)=>{
-    return `mongodb://localhost:27017/${db}`
+    return `mongodb+srv://abdo:mythologyofpasswordthroughdecades@cluster0.kxzcn.mongodb.net/${db}?retryWrites=true&w=majority`
 }
 
 

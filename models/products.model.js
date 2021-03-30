@@ -19,7 +19,7 @@ const productSchema=mongoose.Schema({
 
 const product=mongoose.model('product',productSchema);
 const mongoosedb=(db)=>{
-    return `mongodb://localhost:27017/${db}`
+    return `mongodb+srv://abdo:mythologyofpasswordthroughdecades@cluster0.kxzcn.mongodb.net/${db}?retryWrites=true&w=majority`
 }
 
 exports.getProducts=(QueryObject)=>{
