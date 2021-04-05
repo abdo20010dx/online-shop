@@ -4,7 +4,8 @@ const mail=require('./nodemailer.controller')
 exports.viewActive=(req,res,next)=>{
     res.render('activation',{
         isuser:req.session.userId,
-        activemess:req.flash('activeMess')[0]
+        activemess:req.flash('activeMess')[0],
+        user:0,
     })
 
     

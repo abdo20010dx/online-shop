@@ -12,6 +12,7 @@ exports.getResest=(req,res,next)=>{
         passchanged:req.flash('passchanged')[0],
         resestsent:req.flash('resestsent')[0],
         passvalid:req.flash('passvalid'),
+        user:0,
 
     })
 }

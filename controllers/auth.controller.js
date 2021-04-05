@@ -99,7 +99,7 @@ exports.viewUser=(req,res,next)=>{
     // console.log(req.session.Address)
     res.redirect('/home')
     }else{
-        req.flash('blocked','you have ben blocked')
+        req.flash('blocked','you have been blocked')
         res.redirect('/login')
     }
 })
@@ -148,7 +148,8 @@ exports.viewsignup= (req,res,next)=>{
         validerr:vErr,
         isuser:false,
         emailexist:req.flash('emailexist')[0],
-            myipinfo:req.session.myIp|| {country:'us'}
+        myipinfo:req.session.myIp|| {country:'us'},
+        user:0,
     })
 })
 
@@ -160,6 +161,7 @@ exports.viewsignin=(req,res,next)=>{
         autherr:req.flash('authErr')[0],
         loginvalid:req.flash('loginvalid'),
         isuser:false,
-        blocked:req.flash('blocked')[0]
+        blocked:req.flash('blocked')[0],
+        user:0,
     })
 }
