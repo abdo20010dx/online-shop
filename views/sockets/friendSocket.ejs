@@ -1,10 +1,13 @@
 <%if(!checkfriend){%>
 <script>
-            chatinput.onkeyup=(e)=>{
+        /* 
+            chatinput.onload=(e)=>{
             console.log(e.keyCode)
         socket.emit('addfriend')
             
-        }
+        }*/
+        socket.emit('addfriend')
+
 
 
     // let send=()=>{

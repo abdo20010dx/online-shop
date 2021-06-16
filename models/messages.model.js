@@ -52,3 +52,27 @@ exports.saveMessage=async (dataObj)=>{
         throw new Error(error) 
     }
 }
+
+exports.deleteMessage=async (dataObj)=>{
+    try {
+        await mongoose.connect(mongoosedb('commerce'))
+        let deleted=await Message.findByIdAndDelete(dataObj)
+        mongoose.disconnect()
+        return deleted
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error) 
+    }
+}
+
+exports.updateMessage=async (dataObj)=>{
+    try {
+        await mongoose.connect(mongoosedb('commerce'))
+        let updated=await Message.update(dataObj)
+        mongoose.disconnect()
+        return updated
+    } catch (error) {
+        mongoose.disconnect()
+        throw new Error(error) 
+    }
+}

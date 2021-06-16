@@ -25,8 +25,8 @@ exports.friendSocket=(Io,app)=>{
                 seller:socket.handshake.session.User._id,
             }
     
-               let beOffline= Io.sockets.emit(`offline${userData.seller}`,userData)
-                setTimeout(beOffline, 5000);
+             Io.sockets.emit(`offline${userData.seller}`,userData)
+                
             })
     
 

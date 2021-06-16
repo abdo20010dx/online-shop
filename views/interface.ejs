@@ -46,7 +46,7 @@
 <%}else{%>
         <div class="card" style="width: 100%;">
 
-            <div  class="card-body">
+            <div  class="card-body" >
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                   <ol class="carousel-indicators">
                     <%let prevent1=true %>
@@ -62,19 +62,19 @@
                       <%}%>
                     <%})%>
                   </ol>
-                    <div class="carousel-inner">
+                    <div class="carousel-inner" >
                       <%let prevent2=true %>
 
                       <%products.map((product,index)=>{%>
 
                         <%if(product.slide && prevent2){%>
                           <%prevent2 = false%>
-                          <div class="carousel-item active">
-                           <a href="/product/<%=product._id%>"><img class="d-block w-100" src="<%=product.image%>" alt="<%=product.name%>"></a> 
+                          <div class="carousel-item active"  >
+                           <a href="/product/<%=product._id%>"><img  style="height:25rem" class="d-block w-100" src="<%=product.image%>" alt="<%=product.name%>"></a> 
                           </div>
                             <%}else if(product.slide){%>
                               <div class="carousel-item">
-                                <a href="/product/<%=product._id%>"><img class="d-block w-100" src="<%=product.image%>" alt="<%=product.name%>"></a>
+                                <a href="/product/<%=product._id%>"><img style="height:25rem" class="d-block w-100"   src="<%=product.image%>" alt="<%=product.name%>"></a>
                               </div>
                               <%}%>
                               <%})%>
@@ -95,9 +95,9 @@
     <div class="row">
         <% for(let product of products){ %>
             <div class="col col-12 col-md-6 col-lg-4 col-x1-3">
-                <div class="card" style="width: 18rem;">
-                    <img src="<%=product.image%>" class="card-img-top" >
-                    <div class="card-body">
+                <div class="card" style="width: 18rem; ">
+                    <img src="<%=product.image%>" class="card-img-top " style="height: 15rem; " >
+                    <div class="card-body" >
                         <h5 class="card-title"><a href="/product/<%=product._id%>"><%=product.name%></a></h5>
                         <h5 class="card-title">price:<%=product.price%> $</h5>
                         <h5 class="card-title">category:<%=product.category%></h5>
