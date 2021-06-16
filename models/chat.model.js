@@ -43,7 +43,11 @@ exports.updateChat=async (dataObj)=>{
 exports.getChat=async (dataObj)=>{
     try {
        await mongoose.connect(mongoosedb('ecommerce'))
-       let getchat=await Chat.find(dataObj)
+       let getchat=await Chat.find(dataObj).populate({
+           path:'users',
+           model:'user',
+           select:'name image'
+       })
        mongoose.disconnect()
        return getchat
     } catch (error) {
