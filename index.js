@@ -69,12 +69,15 @@ app.use('/test',testRouter)
 
 const nodemailer=require('nodemailer')
 const friendSocket=require('./server-sockets/friends.socket')
+const chat_messages_socket=require('./server-sockets/chat&messages.socket')
 const intltelinput=require('intl-tel-input')
 // const intlTelInput=require('intlTelInput')
 // console.log(intlTelInput)
 console.log(nodemailer)
 Io.onlineUsers={}
 friendSocket.friendSocket(Io,app)
+chat_messages_socket.chatSocket(Io)
+chat_messages_socket.messagesSocket(Io)
 // Io.on('connection',socket=>{
 // })
 

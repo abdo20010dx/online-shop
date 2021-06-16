@@ -1,7 +1,8 @@
 const mongoose=require('mongoose')
 const chatSchema=mongoose.Schema({
     users:[{type:mongoose.Schema.Types.ObjectId,ref:'user'}],
-    notneed:{type:[String],default:[]}
+    archieve:{type:[String],default:[]},
+    blocked:{type:[String],default:[]}
 })
 const Chat=mongoose.model('chat',chatSchema)
 const mongoosedb=(db)=>{
@@ -28,10 +29,10 @@ exports.Chat=async (myId,friendId)=>{
         
     }
 }
-exports.updateChat=async (dataObj)=>{
+exports.updateChat=async (query,dataObj)=>{
     try {
        await mongoose.connect(mongoosedb('ecommerce'))
-       let updatedchat=await Chat.update(dataObj)
+       let updatedchat=await Chat.findOneAndUpdate(query,dataObj)
        mongoose.disconnect()
        return updatedchat
     } catch (error) {
