@@ -4,7 +4,7 @@ const authModel=require('../models/auth.model')
 
 exports.notUser=(req,res,next)=>{
     if(!req.session.userId)next()
-    else res.redirect('/')
+    else res.redirect('/signup')
 }
 exports.isUser=(req,res,next)=>{
     if(req.session.userId)next()
