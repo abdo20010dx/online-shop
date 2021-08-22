@@ -44,7 +44,7 @@ const userSchema=mongoose.Schema({
     },
     active:{
         type:Boolean,
-        default:false
+        default:true
     },
     resestpass:Number,
 })
