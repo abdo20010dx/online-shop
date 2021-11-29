@@ -23,7 +23,7 @@ const mongoosedb=(db)=>{
 
 exports.saveToCart=(cartitem)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             let saveItem=new Cart(cartitem)
             return saveItem.save()
         }).then(()=>{
@@ -38,7 +38,7 @@ exports.saveToCart=(cartitem)=>{
 
 exports.getFromCart=(userid)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
            return Cart.find(userid,{},{sort:{timestamp:-1}})
         }).then(items=>{
             if(items){
@@ -54,7 +54,7 @@ exports.getFromCart=(userid)=>{
 
 exports.deleteItem=(id)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             // Cart.findByIdAndDelete(id)
             Cart.findByIdAndDelete(id).then((deleted)=>{
                 resolve(deleted)
@@ -68,7 +68,7 @@ exports.deleteItem=(id)=>{
 }
 exports.deleteALL=(id)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             // Cart.findByIdAndDelete(id)
             Cart.deleteMany(id).then((deleted)=>{
                 resolve(deleted)
@@ -84,7 +84,7 @@ exports.deleteALL=(id)=>{
 
 exports.updateItem=(id,updatedItemData)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             Cart.updateOne({_id:id},updatedItemData).then(updated=>{
                 resolve(`the updated on ${updated}`)
                 mongoose.disconnect()
@@ -98,7 +98,7 @@ exports.updateItem=(id,updatedItemData)=>{
 
 exports.noRepeat=(queryObj)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             Cart.find(queryObj).then(repeated=>{
                 resolve(repeated)
                 mongoose.disconnect()

@@ -1,4 +1,4 @@
-const chatModel=require('../models/Chat.model')
+const chatModel=require('../models/chat.model')
 const messagesModel=require('../models/messages.model')
 
 

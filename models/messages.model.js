@@ -15,7 +15,7 @@ const mongoosedb=(db)=>{
 
 exports.getMessages=async (queryobj)=>{
     try {
-        await mongoose.connect(mongoosedb('commerce'))
+        await mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
        let messages= await Message.find(queryobj,null,{sort:{timestamp:1}}).populate({
             path:'chat',//field
             model:'chat',//model

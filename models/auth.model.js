@@ -56,7 +56,7 @@ const mongoosedb=(db)=>{
 
 exports.saveUser=(name,address,phone,email,pass,profession,social)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
            return User.findOne({email:email})
 
             }).then(found=>{

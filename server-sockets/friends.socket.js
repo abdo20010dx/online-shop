@@ -1,6 +1,6 @@
 const mongoose  = require('mongoose')
 const authModel=require('../models/auth.model')
-const chatModel=require('../models/Chat.model')
+const chatModel = require('../models/chat.model')
 
 exports.friendSocket=(Io,app)=>{
     Io.on('connection',socket=>{

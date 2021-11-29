@@ -25,7 +25,7 @@ const mongoosedb=(db)=>{
 exports.getProducts=(QueryObject)=>{
 return new Promise((resolve,reject)=>{
         //connect to db
-        mongoose.connect(mongoosedb('ecommerce'),{useNewUrlParser:true},()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true },{useNewUrlParser:true},()=>{
             //get products
         
                 product.find(QueryObject).then(products=>{
@@ -40,7 +40,7 @@ return new Promise((resolve,reject)=>{
 
 exports.addProduct=(data)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             let producto=new product(data)
             return producto.save()
         }).then(saved=>{
@@ -56,7 +56,7 @@ exports.addProduct=(data)=>{
 
 exports.updateProduct=(query,newData)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             return product.findByIdAndUpdate(query,newData)
         }).then(updated=>{
             resolve(updated)
@@ -71,7 +71,7 @@ exports.updateProduct=(query,newData)=>{
 
 exports.deleteProduct=(query)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             return product.findByIdAndDelete(query)
         }).then(deleted=>{
             resolve(deleted)

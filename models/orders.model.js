@@ -31,7 +31,7 @@ const mongoosedb=(db)=>{
 
 exports.saveorders=(orderData)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             
             let order=new Order(orderData)
             return order.save()
@@ -48,7 +48,7 @@ exports.saveorders=(orderData)=>{
 
 exports.getorders=(ordersquery)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
           return  Order.find(ordersquery,{},{sort:{timestamp:1}})
         }).then(orders=>{
             resolve(orders)
@@ -64,7 +64,7 @@ exports.getorders=(ordersquery)=>{
 
 exports.cancelItem=(id)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             // Cart.findByIdAndDelete(id)
             Order.findByIdAndDelete(id).then((deleted)=>{
                 resolve(deleted)
@@ -79,7 +79,7 @@ exports.cancelItem=(id)=>{
 
 exports.cancelALL=(id)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             // Cart.findByIdAndDelete(id)
             Order.deleteMany(id).then((deleted)=>{
                 resolve(deleted)
@@ -95,7 +95,7 @@ exports.cancelALL=(id)=>{
 
 exports.updateItem=(id,updatedItemData)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
             Order.updateOne({_id:id},updatedItemData).then(updated=>{
                 resolve(updated)
                 mongoose.disconnect()
