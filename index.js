@@ -80,8 +80,28 @@ chat_messages_socket.messagesSocket(Io)
 // })
 
 
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+  
+    if (isNaN(port)) {
+      // named pipe
+      return val;
+    }
+  
+    if (port >= 0) {
+      // port number
+      return port;
+    }
+  
+    return false;
+  }
+  
+ 
+var port = normalizePort(process.env.PORT || '3000');
+app.set('port', port);
 
-server.listen(80,(err)=>{
+
+server.listen(port,(err)=>{
     if(err)console.error(err)
     console.log(`listen on http://localhost:80 http://192.168.1.1`)
 })
