@@ -81,8 +81,8 @@ chat_messages_socket.messagesSocket(Io)
 
 
 
-server.listen(1993,(err)=>{
+server.listen(80,(err)=>{
     if(err)console.error(err)
-    console.log(`listen on http://localhost:1993 http://192.168.1.1`)
+    console.log(`listen on http://localhost:80 http://192.168.1.1`)
 })
 console.log(Io.onlineUsers)

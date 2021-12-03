@@ -25,6 +25,7 @@ exports.friendSocket=(Io,app)=>{
                 seller:socket.handshake.session.User._id,
             }
     
+            // you don't need to refresh to know if his user became offline
              Io.sockets.emit(`offline${userData.seller}`,userData)
                 
             })
