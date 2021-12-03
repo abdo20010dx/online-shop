@@ -24,7 +24,6 @@ const STORE=new sessionStore({
 })
 const session=sessionServer({
     secret:'the mythology of secret session',
-    saveUninitialized:true,
     store:STORE
 })
 
@@ -73,7 +72,6 @@ const chat_messages_socket=require('./server-sockets/chat&messages.socket')
 const intltelinput=require('intl-tel-input')
 // const intlTelInput=require('intlTelInput')
 // console.log(intlTelInput)
-console.log(nodemailer)
 Io.onlineUsers={}
 friendSocket.friendSocket(Io,app)
 chat_messages_socket.chatSocket(Io)

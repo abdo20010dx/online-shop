@@ -16,7 +16,7 @@ const mongoosedb=(db)=>{
 
 exports.Chat=async (myId,friendId)=>{
     try {
-       await mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
+       await mongoose.connect(mongoosedb('ecommerce'))
        let newChat= new Chat({
            users:[myId,friendId]
        })
@@ -31,7 +31,7 @@ exports.Chat=async (myId,friendId)=>{
 }
 exports.updateChat=async (query,dataObj)=>{
     try {
-       await mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
+       await mongoose.connect(mongoosedb('ecommerce'))
        let updatedchat=await Chat.findOneAndUpdate(query,dataObj)
        mongoose.disconnect()
        return updatedchat
@@ -43,7 +43,7 @@ exports.updateChat=async (query,dataObj)=>{
 }
 exports.getChat=async (dataObj)=>{
     try {
-       await mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true })
+       await mongoose.connect(mongoosedb('ecommerce'))
        let getchat=await Chat.find(dataObj).populate({
            path:'users',
            model:'user',

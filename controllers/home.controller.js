@@ -25,7 +25,7 @@ userModel.getUser({_id:id}).then(userData=>{
     }else{
         req.session.FriendData=userData[0]
     }
-
+    
 
 
 
@@ -42,6 +42,7 @@ userModel.getUser({_id:id}).then(userData=>{
        req.session.Product=product
     //    console.log(req.session.Product)
     //render interface.ejs
+    console.log('im in home')
 res.render('interface',{
     checkfriend:checkFriend,
     products:product,

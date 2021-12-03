@@ -56,14 +56,13 @@ const mongoosedb=(db)=>{
 
 exports.saveUser=(name,address,phone,email,pass,profession,social)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
            return User.findOne({email:email})
 
             }).then(found=>{
                 if(found){
                 reject("e-mail already exists")
-                mongoose.disconnect()
-                }
+                    }
                 else{
                    return bcrypt.hash(pass,15)
                 }
@@ -81,10 +80,8 @@ exports.saveUser=(name,address,phone,email,pass,profession,social)=>{
            return user.save()
         }).then((saved)=>{
             resolve(saved)
-            mongoose.disconnect()
         }).catch(err=>{
             reject(`there is error${err}`)
-            mongoose.disconnect()
         })
     })
 }
@@ -96,16 +93,13 @@ return new Promise((resolve,reject)=>{
        return User.findOne({email:email})
     }).then(user=>{
         if(!user){
-            mongoose.disconnect()
             reject('there no user matches that email')
         }else{
             bcrypt.compare(pass,user.password).then(same=>{
                 if(!same){
-                    mongoose.disconnect()
-                    reject('password is not correct')
+                            reject('password is not correct')
                 }else{
-                    mongoose.disconnect()
-                    resolve(user)
+                            resolve(user)
                 }
             })
         }
@@ -123,10 +117,8 @@ exports.getUser=(queryobj)=>{
             return User.find(queryobj)
         }).then(user=>{
             resolve(user)
-            mongoose.disconnect()
         }).catch(err=>{
             reject(err)
-            mongoose.disconnect()
         })
     })
 }
@@ -138,10 +130,8 @@ exports.getUserAndFilter=(queryobj,filter)=>{
             return User.find(queryobj,filter)
         }).then(user=>{
             resolve(user)
-            mongoose.disconnect()
         }).catch(err=>{
             reject(err)
-            mongoose.disconnect()
         })
     })
 }
@@ -169,8 +159,7 @@ exports.updatePass=(encrypted,numberpass,newpass,query)=>{
         }).then(same=>{
             if(!same){
                 reject('the password is wrong')
-                mongoose.disconnect()
-            }else{
+                }else{
                 return bcrypt.hash(newpass,15)
             }
         }).then(hashedpass=>{
@@ -180,11 +169,9 @@ exports.updatePass=(encrypted,numberpass,newpass,query)=>{
                     hashedpass:hashedpass
                 }
                 resolve(resolvedData)
-                mongoose.disconnect()
-            }).catch(err=>{
+                }).catch(err=>{
                 reject(err)
-                mongoose.disconnect()
-            })
+                })
         })
     })
 }
@@ -196,10 +183,8 @@ exports.deleteUser=(queryObj)=>{
            return User.findOneAndDelete(queryObj)
         }).then(deleted=>{
             resolve(deleted)
-            mongoose.disconnect()
         }).catch(err=>{
             reject(err)
-            mongoose.disconnect()
         })
     })
 }

@@ -23,12 +23,11 @@ const mongoosedb=(db)=>{
 
 exports.saveToCart=(cartitem)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
             let saveItem=new Cart(cartitem)
             return saveItem.save()
         }).then(()=>{
             resolve()
-            mongoose.disconnect()
         }).catch(err=>{
             reject(err)
             mongoose.disconnect
@@ -38,45 +37,39 @@ exports.saveToCart=(cartitem)=>{
 
 exports.getFromCart=(userid)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
            return Cart.find(userid,{},{sort:{timestamp:-1}})
         }).then(items=>{
             if(items){
                 resolve(items)
-                mongoose.disconnect()
-            }
+                }
         }).catch(err=>{
             reject(`there's err:${err}`)
-            mongoose.disconnect()
         })
     })
 }
 
 exports.deleteItem=(id)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
             // Cart.findByIdAndDelete(id)
             Cart.findByIdAndDelete(id).then((deleted)=>{
                 resolve(deleted)
-                mongoose.disconnect()
-            }).catch(err=>{
+                }).catch(err=>{
                 reject(err)
-                mongoose.disconnect()
-            })
+                })
         })
     })
 }
 exports.deleteALL=(id)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
             // Cart.findByIdAndDelete(id)
             Cart.deleteMany(id).then((deleted)=>{
                 resolve(deleted)
-                mongoose.disconnect()
-            }).catch(err=>{
+                }).catch(err=>{
                 reject(err)
-                mongoose.disconnect()
-            })
+                })
         })
     })
 }
@@ -84,28 +77,24 @@ exports.deleteALL=(id)=>{
 
 exports.updateItem=(id,updatedItemData)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
             Cart.updateOne({_id:id},updatedItemData).then(updated=>{
                 resolve(`the updated on ${updated}`)
-                mongoose.disconnect()
-            }).catch(err=>{
+                }).catch(err=>{
                 reject(err)
-                mongoose.disconnect()
-            })
+                })
         })
     })
 }
 
 exports.noRepeat=(queryObj)=>{
     return new Promise((resolve,reject)=>{
-        mongoose.connect(mongoosedb('ecommerce'),{ useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex:true }).then(()=>{
+        mongoose.connect(mongoosedb('ecommerce')).then(()=>{
             Cart.find(queryObj).then(repeated=>{
                 resolve(repeated)
-                mongoose.disconnect()
-            }).catch(err=>{
+                }).catch(err=>{
                 reject(`the error is:${err}`)
-                mongoose.disconnect()
-            })
+                })
         })
     })
 }
