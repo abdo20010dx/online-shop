@@ -7,15 +7,15 @@ exports.nodemailer=(email,subj,mess)=>{
     let transporter = nodemailer.createTransport(smtpTransport({
       service: 'gmail',
       auth: {
-        user: 'express.gomla@gmail.com',
-        pass: 'gomla20010'
+        user: 'abdooctopus@gmail.com',
+        pass: 'Mypassword2022'
       },
 
     }));
      
 
       let mailOptions = {
-        from: 'express.gomla@gmail.com',
+        from: 'abdooctopus@gmail.com',
         to: email,
         subject:subj ,
         text: mess
